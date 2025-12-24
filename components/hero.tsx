@@ -54,6 +54,62 @@ export default function Hero() {
 
   const y = useTransform(scrollYProgress, [0, 1], ["0vh", "150vh"])
 
+  const handleScrollDown = () => {
+    const nextSection = document.getElementById('featured-section')
+    if (nextSection) {
+      const targetPosition = nextSection.getBoundingClientRect().top + window.pageYOffset
+      const startPosition = window.pageYOffset
+      const distance = targetPosition - startPosition
+      const duration = 2000 // 2 seconds for slower scroll
+      let start: number | null = null
+
+      const easeInOutCubic = (t: number): number => {
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
+      }
+
+      const animateScroll = (currentTime: number) => {
+        if (start === null) start = currentTime
+        const timeElapsed = currentTime - start
+        const progress = Math.min(timeElapsed / duration, 1)
+        const easedProgress = easeInOutCubic(progress)
+
+        window.scrollTo(0, startPosition + distance * easedProgress)
+
+        if (progress < 1) {
+          requestAnimationFrame(animateScroll)
+        }
+      }
+
+      requestAnimationFrame(animateScroll)
+    } else {
+      // Fallback: scroll by viewport height
+      const targetPosition = window.innerHeight
+      const startPosition = window.pageYOffset
+      const distance = targetPosition
+      const duration = 2000
+      let start: number | null = null
+
+      const easeInOutCubic = (t: number): number => {
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
+      }
+
+      const animateScroll = (currentTime: number) => {
+        if (start === null) start = currentTime
+        const timeElapsed = currentTime - start
+        const progress = Math.min(timeElapsed / duration, 1)
+        const easedProgress = easeInOutCubic(progress)
+
+        window.scrollTo(0, startPosition + distance * easedProgress)
+
+        if (progress < 1) {
+          requestAnimationFrame(animateScroll)
+        }
+      }
+
+      requestAnimationFrame(animateScroll)
+    }
+  }
+
   return (
     <div ref={container} className="h-screen overflow-hidden">
       <Header />
@@ -72,7 +128,10 @@ export default function Hero() {
             <p className="text-base md:text-xl lg:text-3xl leading-relaxed mb-8">
               <TypingText text="Design to Discover." speed={100} delay={2500} />
             </p>
-            <button className="px-4 py-2 border-2 border-white bg-transparent text-white text-sm transition-all duration-300 hover:bg-white hover:text-black cursor-pointer">
+            <button 
+              onClick={handleScrollDown}
+              className="px-4 py-2 border-2 border-white bg-transparent text-white text-sm transition-all duration-300 hover:bg-white hover:text-black cursor-pointer"
+            >
               GET STARTED
             </button>
           </div>
