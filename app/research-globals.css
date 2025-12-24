@@ -17,22 +17,22 @@
   --secondary-foreground: 0 0% 85%;
   --muted: 0 0% 25%;
   --muted-foreground: 0 0% 55%;
-  --accent: 20 100% 60%;
-  --accent-foreground: 0 0% 8%;
+  --accent: 18 55% 42%;
+  --accent-foreground: 0 0% 98%;
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 98%;
   --border: 0 0% 25%;
   --input: 0 0% 20%;
-  --ring: 20 100% 60%;
+  --ring: 18 55% 42%;
   --radius: 0rem;
   --sidebar-background: 0 0% 10%;
   --sidebar-foreground: 0 0% 95%;
-  --sidebar-primary: 20 100% 60%;
-  --sidebar-primary-foreground: 0 0% 8%;
+  --sidebar-primary: 18 55% 42%;
+  --sidebar-primary-foreground: 0 0% 98%;
   --sidebar-accent: 0 0% 15%;
   --sidebar-accent-foreground: 0 0% 95%;
   --sidebar-border: 0 0% 25%;
-  --sidebar-ring: 20 100% 60%;
+  --sidebar-ring: 18 55% 42%;
 }
 
 /* Font variables - will be set via layout */
@@ -104,6 +104,6 @@
 
 /* Custom selection color */
 ::selection {
-  background: hsl(20, 100%, 60%);
-  color: hsl(0, 0%, 8%);
+  background: hsl(18, 55%, 42%);
+  color: hsl(0, 0%, 98%);
 }

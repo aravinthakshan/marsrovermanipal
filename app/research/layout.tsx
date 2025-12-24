@@ -1,7 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { IBM_Plex_Sans, IBM_Plex_Mono, Bebas_Neue } from "next/font/google"
-import { SmoothScroll } from "@/components/smooth-scroll"
 import { ResearchTheme } from "@/components/research-theme"
 import "../research-globals.css"
 
@@ -54,7 +53,7 @@ export default function ResearchLayout({
         style={{ fontFamily: 'var(--font-ibm-plex-sans), sans-serif' }}
       >
         <div className="noise-overlay fixed inset-0 pointer-events-none z-[1000] opacity-[0.03]" aria-hidden="true" />
-        <SmoothScroll>{children}</SmoothScroll>
+        {children}
       </div>
     </>
   )
