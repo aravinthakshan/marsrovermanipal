@@ -5,6 +5,7 @@ import Lenis from "@studio-freight/lenis"
 import Hero from "@/components/hero"
 import Featured from "@/components/featured"
 import Promo from "@/components/promo"
+import News from "@/components/news"
 import Footer from "@/components/footer"
 
 export default function Home() {
@@ -24,6 +25,7 @@ export default function Home() {
       <Hero />
       <Featured />
       <Promo />
+      <News />
       <Footer />
     </main>
   )

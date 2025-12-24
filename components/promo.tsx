@@ -29,8 +29,7 @@ export default function Section() {
       </h3>
 
       <p className="absolute bottom-12 right-6 text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-5xl z-10">
-        Every section is a frame for your story. Shape it, remix it, and let your content spill into unexpected patterns
-        that keep people scrolling.
+      We have been featured in leading newspapers, technical blogs and international magazines from time to time. Our achievements have been highlighted by all forms of media.
       </p>
     </div>
   )
