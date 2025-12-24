@@ -31,9 +31,15 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
 
     gsap.ticker.lagSmoothing(0)
 
+    // Refresh ScrollTrigger after mount
+    setTimeout(() => {
+      ScrollTrigger.refresh()
+    }, 100)
+
     return () => {
       lenis.destroy()
       gsap.ticker.remove(lenis.raf)
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
     }
   }, [])
 

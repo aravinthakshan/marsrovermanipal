@@ -1,11 +1,42 @@
 "use client"
 
+import { useEffect, useRef } from "react"
 import { Facebook, Instagram, Linkedin, Youtube, Mail, Phone, MapPin } from "lucide-react"
 
 export default function Footer() {
+  const footerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    // Force reflow on mount to fix sticky positioning issues
+    const forceReflow = () => {
+      if (footerRef.current) {
+        const currentOpacity = footerRef.current.style.opacity
+        footerRef.current.style.opacity = '0'
+        void footerRef.current.offsetHeight // Force reflow
+        footerRef.current.style.opacity = currentOpacity || '1'
+      }
+    }
+    
+    // Initial reflow
+    requestAnimationFrame(() => {
+      forceReflow()
+      // Double check after animations settle
+      setTimeout(forceReflow, 150)
+    })
+    
+    // Handle window resize to recalculate positioning
+    const handleResize = () => forceReflow()
+    window.addEventListener('resize', handleResize)
+    
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
   return (
     <div
-      className="relative h-[400px] sm:h-[600px] lg:h-[800px] max-h-[800px]"
+      ref={footerRef}
+      className="relative h-[400px] sm:h-[600px] lg:h-[800px] max-h-[800px] transition-opacity duration-200"
       style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
     >
       <div className="relative h-[calc(100vh+400px)] sm:h-[calc(100vh+600px)] lg:h-[calc(100vh+800px)] -top-[100vh]">

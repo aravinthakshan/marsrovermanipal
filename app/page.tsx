@@ -2,6 +2,7 @@
 
 import { useEffect } from "react"
 import Lenis from "@studio-freight/lenis"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Hero from "@/components/hero"
 import Featured from "@/components/featured"
 import Promo from "@/components/promo"
@@ -22,9 +23,15 @@ export default function Home() {
 
     requestAnimationFrame(raf)
 
+    // Refresh ScrollTrigger on navigation/mount
+    setTimeout(() => {
+      ScrollTrigger.refresh()
+    }, 100)
+
     // Cleanup function
     return () => {
       lenis.destroy()
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
     }
   }, [])
 

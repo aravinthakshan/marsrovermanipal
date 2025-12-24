@@ -3,6 +3,7 @@ import { SignalsSection } from "@/components/signals-section"
 import { WorkSection } from "@/components/work-section"
 import { PrinciplesSection } from "@/components/principles-section"
 import Header from "@/components/header"
+import Footer from "@/components/footer"
 
 export default function ResearchPage() {
   return (
@@ -14,6 +15,7 @@ export default function ResearchPage() {
         <SignalsSection />
         <WorkSection />
         <PrinciplesSection />
+        <Footer />
       </div>
     </main>
   )
