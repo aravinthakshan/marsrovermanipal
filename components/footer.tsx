@@ -99,7 +99,20 @@ export default function Footer() {
               <h1 className="text-[18vw] sm:text-[16vw] lg:text-[14vw] leading-[0.8] text-white font-bold tracking-tight">
                 TEAM
               </h1>
-              <p className="text-white text-xs sm:text-sm">©copyright</p>
+              <div className="flex flex-col items-end gap-1">
+                <p className="text-white text-xs sm:text-sm">marsrovermanipal©copyright</p>
+                <p className="text-white text-xs sm:text-sm">
+                  Website built by{" "}
+                  <a
+                    href="https://www.linkedin.com/in/aravinthakshan/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-neutral-300 transition-colors underline"
+                  >
+                    Aravinthakshan
+                  </a>
+                </p>
+              </div>
             </div>
           </div>
         </div>
