@@ -56,15 +56,15 @@ export default function Footer() {
                 <div className="flex flex-col gap-2 text-neutral-300 text-xs sm:text-sm">
                   <div className="flex items-center gap-2">
                     <Phone className="w-4 h-4" />
-                    <span>Aarish Patel : <a href="tel:+919769572334" className="hover:text-white transition-colors">+91 9769572334</a></span>
+                    <span>Gagan Kiran Menderkar : <a href="tel:+919356614919" className="hover:text-white transition-colors">+91 93566 14919</a></span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Phone className="w-4 h-4" />
-                    <span>Kedar Vetal : <a href="tel:+919699975047" className="hover:text-white transition-colors">+91 96999 75047</a></span>
+                    <span>Vivek Kolekar : <a href="tel:+918308823475" className="hover:text-white transition-colors">+91 83088 23475</a></span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Phone className="w-4 h-4" />
-                    <span>Sameer Singh : <a href="tel:+919108077003" className="hover:text-white transition-colors">+91 91080 77003</a></span>
+                    <span>Aryavarta Singh : <a href="tel:+917203056988" className="hover:text-white transition-colors">+91 72030 56988</a></span>
                   </div>
                 </div>
               </div>

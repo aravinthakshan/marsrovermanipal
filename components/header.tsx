@@ -5,7 +5,7 @@ import Link from "next/link"
 export default function Header() {
   const navItems = [
     { label: "HOME", href: "/" },
-    { label: "THE TEAM", href: "#" },
+    { label: "THE TEAM", href: "/team" },
     { label: "COMPETITIONS", href: "#" },
     { label: "RESEARCH", href: "/research" },
     { label: "OUR ALUMNI", href: "#" },
