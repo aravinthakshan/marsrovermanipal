@@ -25,14 +25,6 @@ const signals = [
     note: "Robustness and reliability frameworks ensuring AI systems operate safely and predictably in critical space exploration missions.",
   },
   {
-    title: "Control Systems",
-    note: "Precision control algorithms for autonomous rover navigation, manipulation, and adaptive behavior in unpredictable extraterrestrial terrains.",
-  },
-  {
-    title: "Communication Optimization",
-    note: "Efficient data transmission protocols and network architectures for reliable communication in space missions with limited bandwidth and high latency.",
-  },
-  {
     title: "Communication Systems & Networks",
     note: "Advanced networking protocols and communication architectures for robust data exchange in space exploration missions with challenging environmental conditions.",
   },
