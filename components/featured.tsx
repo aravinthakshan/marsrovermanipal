@@ -2,7 +2,7 @@ import Image from "next/image"
 
 export default function Featured() {
   return (
-    <div id="featured-section" className="flex flex-col lg:flex-row lg:justify-between lg:items-center min-h-screen px-6 py-12 lg:py-0">
+    <div id="featured-section" className="flex flex-col lg:flex-row lg:justify-between lg:items-center min-h-screen px-6 py-12 lg:py-0 bg-black">
       <div className="flex-1 h-[400px] lg:h-[800px] mb-8 lg:mb-0 lg:order-2">
         <Image
           src="/images/woman-horse.jpg"
@@ -13,7 +13,7 @@ export default function Featured() {
         />
       </div>
       <div className="flex-1 text-left lg:h-[800px] flex flex-col justify-center lg:mr-12 lg:order-1">
-        <h3 className="uppercase mb-6 text-3xl md:text-4xl lg:text-5xl font-bold text-white">Mars Rover Manipal</h3>
+        <h3 className="uppercase mb-6 text-3xl md:text-4xl lg:text-5xl font-bold text-white">ABOUT US</h3>
         <p className="text-base lg:text-lg mb-4 text-white">
           Mars Rover Manipal is a multi-disciplinary student team from Manipal Academy of Higher Education (MAHE) striving to design and build next generation rovers for exploration of extraterrestrial environments and focus on applications of robotics in interplanetary missions.
         </p>
