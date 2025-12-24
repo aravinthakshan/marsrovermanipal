@@ -1,6 +1,6 @@
 "use client"
 
-import { Facebook, Instagram, Linkedin, Youtube, Mail, Phone } from "lucide-react"
+import { Facebook, Instagram, Linkedin, Youtube, Mail, Phone, MapPin } from "lucide-react"
 
 export default function Footer() {
   return (
@@ -41,9 +41,15 @@ export default function Footer() {
               {/* ADDRESS */}
               <div className="flex flex-col gap-3 sm:gap-4">
                 <h3 className="mb-2 uppercase text-white text-sm sm:text-base font-bold tracking-wide">ADDRESS</h3>
-                <p className="text-neutral-300 text-xs sm:text-sm leading-relaxed">
-                  Mars Rover Manipal, MAHE Automobile Workshop, MIT, Manipal, India - 576104
-                </p>
+                <a
+                  href="https://maps.app.goo.gl/gqBbFr8yTVhM9Ccz7"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-2 text-neutral-300 hover:text-white transition-colors text-xs sm:text-sm leading-relaxed"
+                >
+                  <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                  <span>Mars Rover Manipal, MAHE Automobile Workshop, MIT, Manipal, India - 576104</span>
+                </a>
               </div>
 
               {/* FOLLOW US */}
