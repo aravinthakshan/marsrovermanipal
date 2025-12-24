@@ -10,14 +10,22 @@ import Footer from "@/components/footer"
 
 export default function Home() {
   useEffect(() => {
+    // Only run on client side
+    if (typeof window === "undefined") return
+
     const lenis = new Lenis()
 
-    function raf(time) {
+    function raf(time: number) {
       lenis.raf(time)
       requestAnimationFrame(raf)
     }
 
     requestAnimationFrame(raf)
+
+    // Cleanup function
+    return () => {
+      lenis.destroy()
+    }
   }, [])
 
   return (

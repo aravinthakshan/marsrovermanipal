@@ -6,6 +6,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  // Ensure proper handling of client-side only code
+  reactStrictMode: true,
 }
 
 export default nextConfig
