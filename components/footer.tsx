@@ -1,5 +1,7 @@
 "use client"
 
+import { Facebook, Instagram, Linkedin, Youtube, Mail, Phone } from "lucide-react"
+
 export default function Footer() {
   return (
     <div
@@ -15,14 +17,24 @@ export default function Footer() {
                 <h3 className="mb-2 uppercase text-white text-sm sm:text-base font-bold tracking-wide">CONTACT US</h3>
                 <a
                   href="mailto:marsrovermanipal@gmail.com"
-                  className="text-neutral-300 hover:text-white transition-colors duration-300 text-xs sm:text-sm"
+                  className="flex items-center gap-2 text-neutral-300 hover:text-white transition-colors duration-300 text-xs sm:text-sm"
                 >
+                  <Mail className="w-4 h-4" />
                   marsrovermanipal@gmail.com
                 </a>
                 <div className="flex flex-col gap-2 text-neutral-300 text-xs sm:text-sm">
-                  <div>Aarish Patel : <a href="tel:+919769572334" className="hover:text-white transition-colors">+91 9769572334</a></div>
-                  <div>Kedar Vetal : <a href="tel:+919699975047" className="hover:text-white transition-colors">+91 96999 75047</a></div>
-                  <div>Sameer Singh : <a href="tel:+919108077003" className="hover:text-white transition-colors">+91 91080 77003</a></div>
+                  <div className="flex items-center gap-2">
+                    <Phone className="w-4 h-4" />
+                    <span>Aarish Patel : <a href="tel:+919769572334" className="hover:text-white transition-colors">+91 9769572334</a></span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Phone className="w-4 h-4" />
+                    <span>Kedar Vetal : <a href="tel:+919699975047" className="hover:text-white transition-colors">+91 96999 75047</a></span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Phone className="w-4 h-4" />
+                    <span>Sameer Singh : <a href="tel:+919108077003" className="hover:text-white transition-colors">+91 91080 77003</a></span>
+                  </div>
                 </div>
               </div>
 
@@ -38,10 +50,42 @@ export default function Footer() {
               <div className="flex flex-col gap-3 sm:gap-4">
                 <h3 className="mb-2 uppercase text-white text-sm sm:text-base font-bold tracking-wide">FOLLOW US</h3>
                 <div className="flex flex-col gap-2 text-neutral-300 text-xs sm:text-sm">
-                  <a href="#" onClick={(e) => e.preventDefault()} className="hover:text-white transition-colors">LinkedIn</a>
-                  <a href="#" onClick={(e) => e.preventDefault()} className="hover:text-white transition-colors">Instagram</a>
-                  <a href="#" onClick={(e) => e.preventDefault()} className="hover:text-white transition-colors">Twitter</a>
-                  <a href="#" onClick={(e) => e.preventDefault()} className="hover:text-white transition-colors">Facebook</a>
+                  <a 
+                    href="https://in.linkedin.com/company/marsrovermanipal" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 hover:text-white transition-colors"
+                  >
+                    <Linkedin className="w-4 h-4" />
+                    LinkedIn
+                  </a>
+                  <a 
+                    href="https://www.instagram.com/marsrovermanipal/?hl=en" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 hover:text-white transition-colors"
+                  >
+                    <Instagram className="w-4 h-4" />
+                    Instagram
+                  </a>
+                  <a 
+                    href="https://www.facebook.com/MarsRoverManipal/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 hover:text-white transition-colors"
+                  >
+                    <Facebook className="w-4 h-4" />
+                    Facebook
+                  </a>
+                  <a 
+                    href="https://www.youtube.com/marsrovermanipal" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 hover:text-white transition-colors"
+                  >
+                    <Youtube className="w-4 h-4" />
+                    YouTube
+                  </a>
                 </div>
               </div>
             </div>
