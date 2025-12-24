@@ -8,7 +8,6 @@ const navItems = [
   { id: "signals", label: "Signals" },
   { id: "work", label: "Experiments" },
   { id: "principles", label: "Principles" },
-  { id: "colophon", label: "Colophon" },
 ]
 
 export function SideNav() {

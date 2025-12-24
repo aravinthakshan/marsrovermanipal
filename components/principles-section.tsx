@@ -16,8 +16,8 @@ export function PrinciplesSection() {
     {
       number: "01",
       titleParts: [
-        { text: "INTERFACE", highlight: true },
-        { text: " MINIMALISM", highlight: false },
+        { text: "RESEARCH ", highlight: true },
+        { text: " AI", highlight: false },
       ],
       description: "Reduce until only the essential remains. Every element earns its place.",
       align: "left",
@@ -25,30 +25,13 @@ export function PrinciplesSection() {
     {
       number: "02",
       titleParts: [
-        { text: "SYSTEMS", highlight: true },
-        { text: " OVER SCREENS", highlight: false },
+        { text: "RESEARCH ", highlight: true },
+        { text: " ECS", highlight: false },
       ],
       description: "Design behaviors, not just layouts. Build logic that scales.",
       align: "right",
     },
-    {
-      number: "03",
-      titleParts: [
-        { text: "CONTROLLED ", highlight: false },
-        { text: "TENSION", highlight: true },
-      ],
-      description: "Balance between restraint and expression. Confidence without excess.",
-      align: "left",
-    },
-    {
-      number: "04",
-      titleParts: [
-        { text: "SIGNAL ", highlight: false },
-        { text: "CLARITY", highlight: true },
-      ],
-      description: "Communication that cuts through noise. Precision in every interaction.",
-      align: "right",
-    },
+
   ]
 
   useEffect(() => {
@@ -94,7 +77,7 @@ export function PrinciplesSection() {
       {/* Section header */}
       <div ref={headerRef} className="mb-24">
         <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">03 / Principles</span>
-        <h2 className="mt-4 font-[var(--font-bebas)] text-5xl md:text-7xl tracking-tight">HOW WE WORK</h2>
+        <h2 className="mt-4 font-[var(--font-bebas)] text-5xl md:text-7xl tracking-tight">Research Team</h2>
       </div>
 
       {/* Staggered principles */}

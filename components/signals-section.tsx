@@ -9,29 +9,28 @@ gsap.registerPlugin(ScrollTrigger)
 
 const signals = [
   {
-    date: "2025.06.10",
-    title: "Signal Field",
-    note: "New interface paradigm for ambient computing environments.",
+    title: "Federated Learning",
+    note: "Distributed machine learning approach that enables model training across decentralized devices while preserving data privacy and reducing communication overhead.",
   },
   {
-    date: "2025.05.28",
-    title: "Silent Agent",
-    note: "Orchestration layer for autonomous design systems.",
+    title: "Computer Vision",
+    note: "Advanced image and video analysis systems for autonomous navigation, object detection, and environmental understanding in robotic applications.",
   },
   {
-    date: "2025.05.15",
-    title: "Noir Grid",
-    note: "Typographic system for editorial interfaces.",
+    title: "Natural Language Processing",
+    note: "Intelligent language understanding and generation systems for human-robot interaction and autonomous decision-making in complex environments.",
   },
   {
-    date: "2025.04.30",
-    title: "Project Lattice",
-    note: "Structural framework for adaptive layouts.",
+    title: "AI Safety",
+    note: "Robustness and reliability frameworks ensuring AI systems operate safely and predictably in critical space exploration missions.",
   },
   {
-    date: "2025.04.12",
-    title: "Echo Chamber",
-    note: "Audio-visual synthesis in browser environments.",
+    title: "Control Systems",
+    note: "Precision control algorithms for autonomous rover navigation, manipulation, and adaptive behavior in unpredictable extraterrestrial terrains.",
+  },
+  {
+    title: "Communication Optimization",
+    note: "Efficient data transmission protocols and network architectures for reliable communication in space missions with limited bandwidth and high latency.",
   },
 ]
 
@@ -135,8 +134,8 @@ export function SignalsSection() {
 
       {/* Section header */}
       <div ref={headerRef} className="mb-16 pr-6 md:pr-12">
-        <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">01 / Signals</span>
-        <h2 className="mt-4 font-[var(--font-bebas)] text-5xl md:text-7xl tracking-tight">WHAT&apos;S NEW</h2>
+        <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">01 / Research Focus</span>
+        <h2 className="mt-4 font-[var(--font-bebas)] text-5xl md:text-7xl tracking-tight">RESEARCH FOCUS</h2>
       </div>
 
       {/* Horizontal scroll container */}
@@ -160,7 +159,7 @@ function SignalCard({
   signal,
   index,
 }: {
-  signal: { date: string; title: string; note: string }
+  signal: { title: string; note: string }
   index: number
 }) {
   return (
@@ -179,9 +178,8 @@ function SignalCard({
         {/* Issue number - editorial style */}
         <div className="flex items-baseline justify-between mb-8">
           <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground">
-            No. {String(index + 1).padStart(2, "0")}
+            Focus {String(index + 1).padStart(2, "0")}
           </span>
-          <time className="font-mono text-[10px] text-muted-foreground/60">{signal.date}</time>
         </div>
 
         {/* Title */}
