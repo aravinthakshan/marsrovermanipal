@@ -40,7 +40,7 @@ export function HeroSection() {
       {/* Left vertical labels */}
       <div className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2">
         <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground -rotate-90 origin-left block whitespace-nowrap">
-          SIGNAL
+          RESEARCH
         </span>
       </div>
 
@@ -72,7 +72,7 @@ export function HeroSection() {
             <BitmapChevron className="transition-transform duration-[400ms] ease-in-out group-hover:rotate-45" />
           </a>
           <a
-            href="#signals"
+            href="#research"
             className="font-mono text-xs uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors duration-200"
           >
             Research Focus

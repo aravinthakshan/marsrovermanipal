@@ -32,6 +32,22 @@ const signals = [
     title: "Communication Optimization",
     note: "Efficient data transmission protocols and network architectures for reliable communication in space missions with limited bandwidth and high latency.",
   },
+  {
+    title: "Communication Systems & Networks",
+    note: "Advanced networking protocols and communication architectures for robust data exchange in space exploration missions with challenging environmental conditions.",
+  },
+  {
+    title: "Digital Systems & VLSI Design",
+    note: "Custom integrated circuit design and digital system architectures optimized for space-grade applications requiring high reliability and low power consumption.",
+  },
+  {
+    title: "Embedded & Cyber-Physical Systems",
+    note: "Real-time embedded systems and cyber-physical integration for autonomous rover operations, sensor fusion, and mission-critical control systems.",
+  },
+  {
+    title: "Control & Automation Systems",
+    note: "Advanced control theory and automation frameworks for precise rover navigation, manipulation, and autonomous decision-making in extraterrestrial environments.",
+  },
 ]
 
 export function SignalsSection() {
@@ -121,7 +137,7 @@ export function SignalsSection() {
   }, [])
 
   return (
-    <section id="signals" ref={sectionRef} className="relative py-32 pl-6 md:pl-28">
+    <section id="research" ref={sectionRef} className="relative py-32 pl-6 md:pl-28">
       <div
         ref={cursorRef}
         className={cn(
