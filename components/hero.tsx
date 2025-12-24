@@ -132,7 +132,7 @@ export default function Hero() {
               onClick={handleScrollDown}
               className="px-4 py-2 border-2 border-white bg-transparent text-white text-sm transition-all duration-300 hover:bg-white hover:text-black cursor-pointer"
             >
-              GET STARTED
+              ABOUT US
             </button>
           </div>
         </div>
