@@ -19,24 +19,29 @@ const bebasNeue = Bebas_Neue({ weight: "400", subsets: ["latin"], variable: "--f
 export const metadata: Metadata = {
   title: "Research — Mars Rover Manipal",
   description:
-    "Interface studies in controlled environments. We design systems that behave, not just screens that display.",
-  generator: "v0.app",
+    "We publish papers and present them at some of the world's top conferences and research journals.",
   icons: {
-    icon: [
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
+  openGraph: {
+    title: "Research — Mars Rover Manipal",
+    description: "We publish papers and present them at some of the world's top conferences and research journals.",
+    images: [
       {
-        url: "/icon-light-32x32.png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/icon-dark-32x32.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/icon.svg",
-        type: "image/svg+xml",
+        url: "/preview.png",
+        width: 1200,
+        height: 630,
+        alt: "Mars Rover Manipal Research",
       },
     ],
-    apple: "/apple-icon.png",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Research — Mars Rover Manipal",
+    description: "We publish papers and present them at some of the world's top conferences and research journals.",
+    images: ["/preview.png"],
   },
 }
 
