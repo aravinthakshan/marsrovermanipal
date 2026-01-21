@@ -291,12 +291,35 @@ export default function SponsorshipPage() {
             <p className="text-neutral-300 mb-8 max-w-xl mx-auto">
               Get in touch with us to learn more about sponsorship opportunities and how we can work together.
             </p>
+            
+            {/* Contact Details */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div className="bg-black/30 rounded-lg p-4">
+                <p className="font-semibold text-white">Aarish Patel</p>
+                <a href="tel:+919769572334" className="text-yellow-400 hover:text-yellow-300 transition-colors">
+                  +91 97695 72334
+                </a>
+              </div>
+              <div className="bg-black/30 rounded-lg p-4">
+                <p className="font-semibold text-white">Kedar Pradeep Vetal</p>
+                <a href="tel:+919699975047" className="text-yellow-400 hover:text-yellow-300 transition-colors">
+                  +91 96999 75047
+                </a>
+              </div>
+              <div className="bg-black/30 rounded-lg p-4">
+                <p className="font-semibold text-white">Krishna Biranje</p>
+                <a href="tel:+916362384646" className="text-yellow-400 hover:text-yellow-300 transition-colors">
+                  +91 63623 84646
+                </a>
+              </div>
+            </div>
+
             <a
               href="mailto:marsrovermanipal@gmail.com"
               className="inline-flex items-center gap-2 bg-white text-black px-8 py-3 rounded-full font-semibold hover:bg-neutral-200 transition-colors"
             >
               <Mail className="w-5 h-5" />
-              Contact Us
+              Email Us
             </a>
           </motion.div>
         </div>
