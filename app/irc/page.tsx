@@ -225,26 +225,26 @@ export default function IRCPage() {
 
       {/* Featured Image Section */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.98 }}
-        whileInView={{ opacity: 1, scale: 1 }}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 1 }}
-        className="relative w-full h-[50vh] md:h-[70vh] mb-24 overflow-hidden"
+        transition={{ duration: 0.8 }}
+        className="px-6 md:px-12 mb-24"
       >
-        <Image
-          src="/irc-mit.png"
-          alt="Mars Rover Manipal Team at IRC"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-neutral-950/50" />
-        <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
-          <div className="max-w-6xl mx-auto">
-            <p className="text-sm md:text-base text-neutral-300 font-medium tracking-wide uppercase">
-              Mars Rover Manipal — IRC Champions
-            </p>
+        <div className="max-w-6xl mx-auto">
+          <div className="relative w-full overflow-hidden rounded-lg border border-neutral-800">
+            <Image
+              src="/irc-mit.png"
+              alt="Mars Rover Manipal Team at IRC"
+              width={1920}
+              height={1080}
+              className="w-full h-auto object-contain"
+              priority
+            />
           </div>
+          <p className="text-center text-sm text-neutral-400 mt-4">
+            Mars Rover Manipal — IRC Champions
+          </p>
         </div>
       </motion.div>
 

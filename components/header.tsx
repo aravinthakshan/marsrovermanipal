@@ -7,9 +7,9 @@ export default function Header() {
     { label: "HOME", href: "/" },
     { label: "THE TEAM", href: "/team" },
     { label: "COMPETITIONS", href: "/competitions" },
-    { label: "IRC 2025", href: "/irc" },
+    { label: "IRC 2026", href: "/irc" },
     { label: "RESEARCH", href: "/research" },
-    { label: "SPONSORSHIP", href: "#" },
+    { label: "SPONSORSHIP", href: "/sponsorship" },
   ]
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
