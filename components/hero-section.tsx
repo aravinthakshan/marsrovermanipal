@@ -46,6 +46,18 @@ export function HeroSection() {
 
       {/* Main content */}
       <div ref={contentRef} className="flex-1 w-full">
+        {/* Publications Badge */}
+        <a
+          href="https://docs.google.com/document/d/132b0J6ipMl2g1XjIsCGc_7UDYQvMAXCA/edit"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 bg-accent/10 border border-accent/30 px-4 py-2 rounded-full mb-8 hover:bg-accent/20 transition-colors duration-200"
+        >
+          <span className="w-2 h-2 bg-accent rounded-full animate-pulse" />
+          <span className="font-mono text-xs text-accent">35+ Publications</span>
+          <span className="font-mono text-xs text-muted-foreground">— View All Papers</span>
+        </a>
+
         <SplitFlapAudioProvider>
           <div className="relative">
             <SplitFlapText text="RESEARCH" speed={80} />
@@ -60,15 +72,17 @@ export function HeroSection() {
         </h2>
 
         <p className="mt-12 max-w-md font-mono text-sm text-muted-foreground leading-relaxed">
-        We publish papers and present them at some of the world's top conferences and research journals.ß
+        We publish papers and present them at some of the world's top conferences and research journals.
         </p>
 
         <div className="mt-16 flex items-center gap-8">
           <a
-            href="#work"
+            href="https://docs.google.com/document/d/132b0J6ipMl2g1XjIsCGc_7UDYQvMAXCA/edit"
+            target="_blank"
+            rel="noopener noreferrer"
             className="group inline-flex items-center gap-3 border border-foreground/20 px-6 py-3 font-mono text-xs uppercase tracking-widest text-foreground hover:border-accent hover:text-accent transition-all duration-200"
           >
-            <ScrambleTextOnHover text="View Publications" as="span" duration={0.6} />
+            <ScrambleTextOnHover text="View All Publications" as="span" duration={0.6} />
             <BitmapChevron className="transition-transform duration-[400ms] ease-in-out group-hover:rotate-45" />
           </a>
           <a

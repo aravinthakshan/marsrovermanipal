@@ -10,35 +10,35 @@ gsap.registerPlugin(ScrollTrigger)
 const signals = [
   {
     title: "Federated Learning",
-    note: "Distributed machine learning approach that enables model training across decentralized devices while preserving data privacy and reducing communication overhead.",
+    note: "Privacy-preserving distributed learning for multi-robot systems. Our work includes dynamic hybrid resource utilization and intelligent layering for communication-efficient training.",
   },
   {
     title: "Computer Vision",
-    note: "Advanced image and video analysis systems for autonomous navigation, object detection, and environmental understanding in robotic applications.",
+    note: "Camouflage object detection, mixed-exposure correction, and adversarial robustness. Recent work includes LaFINet (AAAI 2026) and HipyrNet for feature pyramid networks.",
   },
   {
     title: "Natural Language Processing",
-    note: "Intelligent language understanding and generation systems for human-robot interaction and autonomous decision-making in complex environments.",
+    note: "Topological feature-based adversarial attack mitigation in OCR models and intelligent document understanding systems.",
   },
   {
-    title: "AI Safety",
-    note: "Robustness and reliability frameworks ensuring AI systems operate safely and predictably in critical space exploration missions.",
+    title: "AI Safety & Robustness",
+    note: "Adversarial attack mitigation, model robustness, and reliable AI systems for mission-critical applications in space exploration.",
   },
   {
-    title: "Communication Systems & Networks",
-    note: "Advanced networking protocols and communication architectures for robust data exchange in space exploration missions with challenging environmental conditions.",
+    title: "Quantum Networks",
+    note: "Entanglement-aware routing for satellite quantum networks under orbital and atmospheric variability. Novel approaches for quantum communication in space.",
   },
   {
-    title: "Digital Systems & VLSI Design",
-    note: "Custom integrated circuit design and digital system architectures optimized for space-grade applications requiring high reliability and low power consumption.",
+    title: "UAV Swarm Communications",
+    note: "Hybrid MAC protocols with multi-layered security for resource-constrained UAV swarm networks. Published at ISED 2025.",
   },
   {
-    title: "Embedded & Cyber-Physical Systems",
-    note: "Real-time embedded systems and cyber-physical integration for autonomous rover operations, sensor fusion, and mission-critical control systems.",
+    title: "Embedded & Control Systems",
+    note: "Real-time embedded systems for autonomous rover operations, sensor fusion, and mission-critical control with low-latency requirements.",
   },
   {
-    title: "Control & Automation Systems",
-    note: "Advanced control theory and automation frameworks for precise rover navigation, manipulation, and autonomous decision-making in extraterrestrial environments.",
+    title: "Wireless & Satellite Networks",
+    note: "Advanced networking protocols for robust data exchange in space exploration missions, including satellite communication and deep-space networking.",
   },
 ]
 

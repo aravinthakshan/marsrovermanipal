@@ -7,42 +7,48 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 gsap.registerPlugin(ScrollTrigger)
 
-const experiments = [
+const publications = [
   {
-    title: "Project Lattice",
-    medium: "Interface Study",
-    description: "Structural framework for adaptive layouts in dynamic content systems.",
+    title: "LaFINet",
+    medium: "AAAI 2026 (A*)",
+    description: "Laplacian-Based Frequency Injection Network for Camouflage Object Detection. Aravinthakshan et al.",
     span: "col-span-2 row-span-2",
+    link: "https://docs.google.com/document/d/132b0J6ipMl2g1XjIsCGc_7UDYQvMAXCA/edit",
   },
   {
-    title: "Signal Field",
-    medium: "Agent Orchestration",
-    description: "Autonomous coordination layer for multi-agent environments.",
+    title: "Hybrid MAC Protocol",
+    medium: "ISED 2025",
+    description: "Integrated Multi-Layered Security for Resource-Constrained UAV Swarm Communications. Bhatt et al.",
     span: "col-span-1 row-span-1",
+    link: "https://arxiv.org/abs/2510.10236",
   },
   {
-    title: "Silent Agent",
-    medium: "Visual System",
-    description: "Non-intrusive interface patterns for ambient computing.",
+    title: "HipyrNet",
+    medium: "Computer Vision",
+    description: "Hypernet-Guided Feature Pyramid Network for Mixed-Exposure Correction.",
     span: "col-span-1 row-span-2",
+    link: "https://arxiv.org/html/2501.05195v1",
   },
   {
-    title: "Noir Grid",
-    medium: "Typography",
-    description: "High-contrast typographic system for editorial interfaces.",
+    title: "Dynamic Hybrid Resource",
+    medium: "COMSNETS 2026 (A)",
+    description: "MCS-based Intelligent Layering for Resource Utilization. Bhatt et al.",
     span: "col-span-1 row-span-1",
+    link: "https://docs.google.com/document/d/132b0J6ipMl2g1XjIsCGc_7UDYQvMAXCA/edit",
   },
   {
-    title: "Echo Chamber",
-    medium: "Audio-Visual",
-    description: "Generative soundscapes mapped to interface interactions.",
+    title: "Entanglement-Aware Routing",
+    medium: "IEEE ANTS 2025",
+    description: "Adaptive Routing for Satellite Quantum Networks under Orbital and Atmospheric Variability. Bhatt et al.",
     span: "col-span-2 row-span-1",
+    link: "https://docs.google.com/document/d/132b0J6ipMl2g1XjIsCGc_7UDYQvMAXCA/edit",
   },
   {
-    title: "Void Protocol",
-    medium: "Experimental",
-    description: "Negative space as primary interaction medium.",
+    title: "TopoReformer",
+    medium: "AAAI AICS Workshop",
+    description: "Topological Feature-based Adversarial Attack Mitigation in OCR Models. Bhaghyesh et al.",
     span: "col-span-1 row-span-1",
+    link: "https://docs.google.com/document/d/132b0J6ipMl2g1XjIsCGc_7UDYQvMAXCA/edit",
   },
 ]
 
@@ -96,14 +102,22 @@ export function WorkSection() {
   return (
     <section ref={sectionRef} id="work" className="relative py-32 pl-6 md:pl-28 pr-6 md:pr-12">
       {/* Section header */}
-      <div ref={headerRef} className="mb-16 flex items-end justify-between">
+      <div ref={headerRef} className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
-          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">02 / Experiments</span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-accent">02 / Publications</span>
           <h2 className="mt-4 font-[var(--font-bebas)] text-5xl md:text-7xl tracking-tight">OUR PUBLICATIONS</h2>
+          <p className="mt-4 font-mono text-xs text-muted-foreground leading-relaxed max-w-md">
+            Some of our recent publications. We have 35+ papers published in top conferences and journals.
+          </p>
         </div>
-        <p className="hidden md:block max-w-xs font-mono text-xs text-muted-foreground text-right leading-relaxed">
-          Studies across interface design, agent systems, and visual computation.
-        </p>
+        <a
+          href="https://docs.google.com/document/d/132b0J6ipMl2g1XjIsCGc_7UDYQvMAXCA/edit"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 border border-accent/50 bg-accent/10 px-4 py-2 font-mono text-xs uppercase tracking-widest text-accent hover:bg-accent/20 transition-colors duration-200 whitespace-nowrap"
+        >
+          View All 35+ Papers →
+        </a>
       </div>
 
       {/* Asymmetric grid */}
@@ -111,8 +125,8 @@ export function WorkSection() {
         ref={gridRef}
         className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 auto-rows-[180px] md:auto-rows-[200px]"
       >
-        {experiments.map((experiment, index) => (
-          <WorkCard key={index} experiment={experiment} index={index} persistHover={index === 0} />
+        {publications.map((publication, index) => (
+          <WorkCard key={index} experiment={publication} index={index} persistHover={index === 0} />
         ))}
       </div>
     </section>
@@ -129,12 +143,13 @@ function WorkCard({
     medium: string
     description: string
     span: string
+    link?: string
   }
   index: number
   persistHover?: boolean
 }) {
   const [isHovered, setIsHovered] = useState(false)
-  const cardRef = useRef<HTMLElement>(null)
+  const cardRef = useRef<HTMLAnchorElement>(null)
   const [isScrollActive, setIsScrollActive] = useState(false)
 
   useEffect(() => {
@@ -154,8 +169,11 @@ function WorkCard({
   const isActive = isHovered || isScrollActive
 
   return (
-    <article
+    <a
       ref={cardRef}
+      href={experiment.link || "#"}
+      target="_blank"
+      rel="noopener noreferrer"
       className={cn(
         "group relative border border-border/40 p-5 flex flex-col justify-between transition-all duration-500 cursor-pointer overflow-hidden",
         experiment.span,
@@ -219,6 +237,6 @@ function WorkCard({
         <div className="absolute top-0 right-0 w-full h-[1px] bg-accent" />
         <div className="absolute top-0 right-0 w-[1px] h-full bg-accent" />
       </div>
-    </article>
+    </a>
   )
 }

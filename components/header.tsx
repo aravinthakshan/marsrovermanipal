@@ -6,9 +6,9 @@ export default function Header() {
   const navItems = [
     { label: "HOME", href: "/" },
     { label: "THE TEAM", href: "/team" },
-    { label: "COMPETITIONS", href: "#" },
+    { label: "COMPETITIONS", href: "/competitions" },
+    { label: "IRC 2025", href: "/irc" },
     { label: "RESEARCH", href: "/research" },
-    { label: "OUR ALUMNI", href: "#" },
     { label: "SPONSORSHIP", href: "#" },
   ]
 
@@ -19,9 +19,9 @@ export default function Header() {
   }
 
   return (
-    <header className="absolute top-0 left-0 right-0 z-20 p-6 md:p-8">
+    <header className="absolute top-0 left-0 right-0 z-50 p-6 md:p-8 pointer-events-auto">
       <nav className="flex items-center justify-center">
-        <div className="flex gap-4 md:gap-6 lg:gap-8 flex-wrap justify-center">
+        <div className="flex gap-4 md:gap-6 lg:gap-8 flex-wrap justify-center pointer-events-auto">
           {navItems.map((item, index) => (
             <Link
               key={index}
