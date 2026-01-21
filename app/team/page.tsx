@@ -4,126 +4,188 @@ import Image from "next/image"
 import Header from "@/components/header"
 import Footer from "@/components/footer"
 import { motion } from "framer-motion"
+import { useEffect, useState } from "react"
+import { Linkedin, Github, Globe } from "lucide-react"
 
 interface TeamMember {
   name: string
-  role?: string
   image: string
+  year?: string
+  position?: string
+  domain?: string
+  description?: string
+  expertise?: string
+  linkedin?: string
+  github?: string
+  website?: string
 }
 
-const boardMembers: TeamMember[] = [
-  {
-    name: "Gagan Kiran Menderkar",
-    role: "Team Leader",
-    image: "/team/gagan.jpeg"
-  },
-  {
-    name: "Vivek Kolekar",
-    role: "Team Manager",
-    image: "/team/vivek.jpg"
-  },
-  {
-    name: "Aryavarta Singh",
-    role: "Technical Head",
-    image: "/team/aryavarta.jpg"
-  },
-  {
-    name: "Mustafa Haji",
-    role: "Social Media and Public Relations Head",
-    image: "/team/mustafa.jpeg"
-  },
-  {
-    name: "Ankur Monga",
-    role: "Artificial Intelligence and Automation Head",
-    image: "/team/ankur.jpg"
-  },
-  {
-    name: "Piyush Daigavhane",
-    role: "Electronics and Control Systems Head",
-    image: "/team/piyush.jpg"
-  },
-  {
-    name: "Vipul Dinesh",
-    role: "Mechanical Design and Manufacturing Head",
-    image: "/team/vipul.jpg"
-  },
-  {
-    name: "Arooja Tyagi",
-    role: "Life Science Head",
-    image: "/team/arooja.jpg"
-  },
-  {
-    name: "Ishaan Gakhar",
-    role: "Research Head",
-    image: "/team/ishaan.jpg"
+// Google Sheet ID and sheet names
+const SPREADSHEET_ID = "1URxCnU98YvX7dtyJWE7PzLhrqQKdVDpI7y0C1bQt9H4"
+
+// Sheet names for different sections
+const SHEET_NAMES = {
+  board: "Board",
+  senior: "Senior team",
+  rover: "Rover team",
+  research: "Research",
+}
+
+// Convert Google Drive view link to direct image URL
+function convertDriveUrl(url: string): string {
+  if (!url) return ""
+  
+  const trimmedUrl = url.trim()
+  
+  // If it's a Google Drive link, convert it to direct view URL
+  // Matches: /file/d/FILE_ID/ or /d/FILE_ID/ or id=FILE_ID
+  const driveMatch = trimmedUrl.match(/(?:\/d\/|\/file\/d\/|id=)([a-zA-Z0-9_-]+)/)
+  if (driveMatch) {
+    // Use thumbnail URL which works better for public files
+    return `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=w1000`
   }
-]
+  
+  // If it's just a filename (no http/https), assume it's in the team folder
+  if (!trimmedUrl.startsWith("http") && !trimmedUrl.startsWith("/")) {
+    return `/team/${trimmedUrl}`
+  }
+  
+  return trimmedUrl
+}
 
-const aiMembers: TeamMember[] = [
-  { name: "Prateek Manoj Mhatre", image: "/team/ai/prateek.webp" },
-  { name: "Nikhilesh Shashikumar", image: "/team/ai/nikhilesh.webp" },
-  { name: "G.Siddharth Reddy", image: "/team/ai/siddharth.webp" },
-  { name: "Aditi Arun", image: "/team/ai/Aditi.jpg" },
-  { name: "Akshat Gupta", image: "/team/ai/akshat.jpg" },
-  { name: "Dillon Asher Almeida", image: "/team/ai/dillon.jpg" },
-]
+// Find column index by checking if header contains the keyword
+function findColumnIndex(headers: string[], ...keywords: string[]): number {
+  for (const keyword of keywords) {
+    const index = headers.findIndex(h => h.includes(keyword))
+    if (index !== -1) return index
+  }
+  return -1
+}
 
-const ecsMembers: TeamMember[] = [
-  { name: "Aarish Patel", image: "/team/ecs/Aarish.jpg" },
-  { name: "Harsh Gupta", image: "/team/ecs/Harsh.jpg" },
-  { name: "Jahan Marfatia", image: "/team/ecs/jahan.jpeg" },
-  { name: "Sameer Singh", image: "/team/ecs/sameer.jpg" },
-  { name: "Suhail Malik", image: "/team/ecs/Suhail.jpeg" },
-]
+// Get value from row by column index, with fallback
+function getValue(row: string[], index: number): string {
+  if (index === -1 || index >= row.length) return ""
+  return row[index]?.trim() || ""
+}
 
-const mechanicalMembers: TeamMember[] = [
-  { name: "Suryank Joshi", image: "/team/mechanical/suryank.webp" },
-  { name: "Het Ambaliya", image: "/team/mechanical/het.jpg" },
-  { name: "Vrishin Ashlyn Lakra", image: "/team/mechanical/Vrishin.jpg" },
-  { name: "Kedar Vetal", image: "/team/mechanical/kedar.jpg" },
-  { name: "Krishna Biranje", image: "/team/mechanical/Krishna.jpg" },
-  { name: "Ronan Andrew Fonseca", image: "/team/mechanical/Ronan.png" },
-  { name: "Shreyan Pal", image: "/team/mechanical/Shreyan.jpg" },
-  { name: "Tanisha Bharambe", image: "/team/mechanical/Tanisha.jpeg" },
-]
+// Fetch data from Google Sheets
+async function fetchSheetData(sheetName: string): Promise<TeamMember[]> {
+  try {
+    const url = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheetName)}`
+    const response = await fetch(url)
+    const csvText = await response.text()
+    
+    // Parse CSV
+    const rows = parseCSV(csvText)
+    if (rows.length < 2) return []
+    
+    // Normalize headers: lowercase, trim, remove extra spaces
+    const headers = rows[0].map(h => h.toLowerCase().trim().replace(/\s+/g, ' '))
+    
+    // Find column indices flexibly
+    const nameIdx = findColumnIndex(headers, "name")
+    const imageIdx = findColumnIndex(headers, "link to image", "image", "photo")
+    const yearIdx = findColumnIndex(headers, "year")
+    const positionIdx = findColumnIndex(headers, "position", "role")
+    const domainIdx = findColumnIndex(headers, "domain")
+    const descriptionIdx = findColumnIndex(headers, "description")
+    const expertiseIdx = findColumnIndex(headers, "expertise")
+    const linkedinIdx = findColumnIndex(headers, "linkedin")
+    const githubIdx = findColumnIndex(headers, "github")
+    const websiteIdx = findColumnIndex(headers, "website", "others")
+    
+    console.log("Sheet:", sheetName, "Headers:", headers)
+    console.log("Image column index:", imageIdx)
+    
+    const data: TeamMember[] = []
+    
+    for (let i = 1; i < rows.length; i++) {
+      const row = rows[i]
+      const name = getValue(row, nameIdx)
+      if (!name) continue // Skip empty rows
+      
+      const imageUrl = getValue(row, imageIdx)
+      console.log(`Row ${i} - Name: ${name}, Raw Image URL: ${imageUrl}`)
+      
+      const member: TeamMember = {
+        name,
+        image: convertDriveUrl(imageUrl),
+        year: getValue(row, yearIdx),
+        position: getValue(row, positionIdx),
+        domain: getValue(row, domainIdx),
+        description: getValue(row, descriptionIdx),
+        expertise: getValue(row, expertiseIdx),
+        linkedin: getValue(row, linkedinIdx),
+        github: getValue(row, githubIdx),
+        website: getValue(row, websiteIdx),
+      }
+      
+      console.log(`Converted image URL: ${member.image}`)
+      data.push(member)
+    }
+    
+    return data
+  } catch (error) {
+    console.error(`Error fetching sheet ${sheetName}:`, error)
+    return []
+  }
+}
 
-const managementMembers: TeamMember[] = [
-  { name: "Neel Singhal", image: "/team/management/neel.jpg" },
-]
-
-const researchMembers: TeamMember[] = [
-  { name: "Krish Didwania", image: "/team/research/krish.webp" },
-  { name: "Laven Srivastava", image: "/team/research/laven.webp" },
-  { name: "Nirbhay Singhal", image: "/team/research/nirbhay.webp" },
-  { name: "A S Aravinthakshan", image: "/team/research/Aravinthakshan.jpeg" },
-  { name: "Aadiv Rath", image: "/team/research/Aadiv.png" },
-  { name: "Aditya Prashant Naidu", image: "/team/research/Aditya.png" },
-  { name: "Anirvesh Arcot", image: "/team/research/Anirvesh.jpg" },
-  { name: "Aravind Shenoy", image: "/team/research/Aravind.jpg" },
-  { name: "Aryaman Gupta", image: "/team/research/aryaman.jpg" },
-  { name: "Aryesh Guha", image: "/team/research/Aryesh.jpg" },
-  { name: "Chinmay MK Rao", image: "/team/research/chinmay.jpg" },
-  { name: "Dhrumil Bhatt", image: "/team/research/Dhrumil.jpg" },
-  { name: "Hem Gosalia", image: "/team/research/Hem.jpg" },
-  { name: "Sanidhya Singhal", image: "/team/research/Sanidhya.jpg" },
-  { name: "Shaurya Singh Rathore", image: "/team/research/Shaurya.jpg" },
-  { name: "Siddharth P", image: "/team/research/SiddharthP.jpg" },
-  { name: "Yuvika Chaudhary", image: "/team/research/Yuvika.jpg" },
-]
-
-const scienceMembers: TeamMember[] = [
-  { name: "Sanvi Shetty", image: "/team/science/sanvi.jpg" },
-  { name: "Mitwa Saraf", image: "/team/science/Mitwa.jpg" },
-  { name: "Anushree Dutt", image: "/team/science/Anushree.jpg" },
-  { name: "Krish Bafna", image: "/team/science/Krish.jpeg" },
-]
+// Parse CSV properly handling quoted fields
+function parseCSV(text: string): string[][] {
+  const rows: string[][] = []
+  let currentRow: string[] = []
+  let currentField = ""
+  let inQuotes = false
+  
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i]
+    const nextChar = text[i + 1]
+    
+    if (inQuotes) {
+      if (char === '"' && nextChar === '"') {
+        currentField += '"'
+        i++
+      } else if (char === '"') {
+        inQuotes = false
+      } else {
+        currentField += char
+      }
+    } else {
+      if (char === '"') {
+        inQuotes = true
+      } else if (char === ',') {
+        currentRow.push(currentField)
+        currentField = ""
+      } else if (char === '\n' || (char === '\r' && nextChar === '\n')) {
+        currentRow.push(currentField)
+        rows.push(currentRow)
+        currentRow = []
+        currentField = ""
+        if (char === '\r') i++
+      } else if (char !== '\r') {
+        currentField += char
+      }
+    }
+  }
+  
+  if (currentField || currentRow.length > 0) {
+    currentRow.push(currentField)
+    rows.push(currentRow)
+  }
+  
+  return rows
+}
 
 interface TeamSectionProps {
   title: string
   members: TeamMember[]
+  showDetails?: boolean
 }
 
-function TeamSection({ title, members }: TeamSectionProps) {
+function TeamSection({ title, members, showDetails = false }: TeamSectionProps) {
+  if (members.length === 0) return null
+  
   return (
     <section className="px-6 md:px-12 pb-24 max-w-7xl mx-auto">
       <motion.div
@@ -145,20 +207,74 @@ function TeamSection({ title, members }: TeamSectionProps) {
               className="group relative w-full max-w-sm aspect-[3/4] overflow-hidden rounded-lg bg-neutral-900"
             >
               <div className="absolute inset-0">
-                <Image
-                  src={member.image}
-                  alt={member.name}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
+                {member.image ? (
+                  member.image.startsWith("http") ? (
+                    // Use regular img tag for external URLs (Google Drive, etc.)
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      referrerPolicy="no-referrer"
+                    />
+                  ) : (
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  )
+                ) : (
+                  <div className="w-full h-full bg-neutral-800 flex items-center justify-center">
+                    <span className="text-4xl text-neutral-600">{member.name.charAt(0)}</span>
+                  </div>
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
               </div>
               
               <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
                 <h3 className="text-xl font-bold text-white mb-1">{member.name}</h3>
-                {member.role && (
-                  <p className="text-sm text-neutral-300 font-medium tracking-wide uppercase">{member.role}</p>
+                {member.position && (
+                  <p className="text-sm text-neutral-300 font-medium tracking-wide uppercase">{member.position}</p>
                 )}
+                {showDetails && member.expertise && (
+                  <p className="text-xs text-neutral-400 mt-2 line-clamp-2">{member.expertise}</p>
+                )}
+                
+                {/* Social Links */}
+                <div className="flex gap-3 mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  {member.linkedin && (
+                    <a 
+                      href={member.linkedin} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-neutral-400 hover:text-white transition-colors"
+                    >
+                      <Linkedin size={18} />
+                    </a>
+                  )}
+                  {member.github && (
+                    <a 
+                      href={member.github} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-neutral-400 hover:text-white transition-colors"
+                    >
+                      <Github size={18} />
+                    </a>
+                  )}
+                  {member.website && (
+                    <a 
+                      href={member.website} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-neutral-400 hover:text-white transition-colors"
+                    >
+                      <Globe size={18} />
+                    </a>
+                  )}
+                </div>
               </div>
             </motion.div>
           ))}
@@ -169,6 +285,33 @@ function TeamSection({ title, members }: TeamSectionProps) {
 }
 
 export default function TeamPage() {
+  const [boardMembers, setBoardMembers] = useState<TeamMember[]>([])
+  const [seniorMembers, setSeniorMembers] = useState<TeamMember[]>([])
+  const [roverMembers, setRoverMembers] = useState<TeamMember[]>([])
+  const [researchMembers, setResearchMembers] = useState<TeamMember[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function loadTeamData() {
+      setLoading(true)
+      
+      const [board, senior, rover, research] = await Promise.all([
+        fetchSheetData(SHEET_NAMES.board),
+        fetchSheetData(SHEET_NAMES.senior),
+        fetchSheetData(SHEET_NAMES.rover),
+        fetchSheetData(SHEET_NAMES.research),
+      ])
+      
+      setBoardMembers(board)
+      setSeniorMembers(senior)
+      setRoverMembers(rover)
+      setResearchMembers(research)
+      setLoading(false)
+    }
+    
+    loadTeamData()
+  }, [])
+
   return (
     <main className="bg-neutral-950 min-h-screen text-white">
       <Header />
@@ -185,13 +328,18 @@ export default function TeamPage() {
         </motion.h1>
       </div>
 
-      <TeamSection title="Board" members={boardMembers} />
-      <TeamSection title="Artificial Intelligence & Automation" members={aiMembers} />
-      <TeamSection title="Electronics & Control Systems" members={ecsMembers} />
-      <TeamSection title="Mechanical Design & Manufacturing" members={mechanicalMembers} />
-      <TeamSection title="Life Science" members={scienceMembers} />
-      <TeamSection title="Research" members={researchMembers} />
-      <TeamSection title="Management" members={managementMembers} />
+      {loading ? (
+        <div className="flex justify-center items-center py-32">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
+        </div>
+      ) : (
+        <>
+          <TeamSection title="Board" members={boardMembers} showDetails />
+          <TeamSection title="Senior Team" members={seniorMembers} />
+          <TeamSection title="Rover Team" members={roverMembers} />
+          <TeamSection title="Research" members={researchMembers} />
+        </>
+      )}
 
       <Footer />
     </main>
